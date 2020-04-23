@@ -39,3 +39,11 @@ total_barrels_by_state <- beer_states %>%
 total_barrels_by_state
 ```
 
+And links to the awesome code from other Ladies at the meet-up: 
+
+With a map: 
+https://gist.github.com/szimmer/9a8dc380946c8287bca26b818036c3c8
+
+Over time by type of production: 
+https://gist.github.com/KateriSalk/9fccc09451fcc412828a013d366c77f9
+
