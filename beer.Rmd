@@ -1,0 +1,41 @@
+---
+title: "Tidy Tuesday - Beer"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+```{r packages, include=FALSE}
+library(tidytuesdayR)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+theme_set(theme_minimal())
+```
+
+```{r}
+brewing_materials <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-03-31/brewing_materials.csv')
+beer_taxed <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-03-31/beer_taxed.csv')
+brewer_size <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-03-31/brewer_size.csv')
+beer_states <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-03-31/beer_states.csv')
+```
+
+### Production per states
+
+```{r, echo=FALSE}
+total_barrels_by_state <- beer_states %>%
+  group_by(state) %>%
+  #filter(!state == "total") %>% 
+  mutate(total_barrels = sum(barrels)) %>%
+  filter(state == c("CO", "CA", "TX", "OH", "GA", "VA", "MO", "FL", "WI", "NY")) %>%
+  ggplot(aes(total_barrels, state)) +
+  geom_col() +
+  labs(x = "Total number of barrels", 
+       y = "State", 
+       title = "Which 10 states produced the most beer barrels between 2007 and 2019?")
+total_barrels_by_state
+```
+
